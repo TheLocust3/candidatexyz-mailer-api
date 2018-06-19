@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  post 'company' => 'mail#mail_as_company'
+  post 'campaign' => 'mail#mail_as_campaign'
+  post 'campaign_many' => 'mail#mail_as_campaign'
 end
