@@ -19,10 +19,9 @@ class MailController < ApplicationController
     end
 
     def mail_many_as_campaign
-        parameters = mail_many_as_campaign_params(params)
-
-        parameters[:subjects].map {|subject|
-            Mailer.send_as_campaign(parameters[:email], subject, parameters[:body]).deliver_later
+        params[:emails].map {|email|
+            puts 'testestestestestest'
+            Mailer.send_as_campaign(email, params[:subject], params[:body]).deliver_later
         }
 
         render :json => { 'status': 'ok' }
@@ -35,9 +34,5 @@ class MailController < ApplicationController
 
     def mail_as_campaign_params(params)
         params.permit(:email, :subject, :body)
-    end
-
-    def mail_many_as_campaign_params(params)
-        params.permit(:email, :subjects, :body)
     end
 end
