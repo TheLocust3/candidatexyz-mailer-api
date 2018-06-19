@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class MailController < ApplicationController
     include Authenticatable
     before_action :authenticate
 
@@ -6,12 +6,16 @@ class UsersController < ApplicationController
         parameters = mail_as_company_params(params)
 
         Mailer.send_as_company(parameters[:email], parameters[:subject], parameters[:body]).deliver_later
+
+        render :json => { 'status': 'ok' }
     end
 
     def mail_as_campaign
         parameters = mail_as_campaign_params(params)
 
         Mailer.send_as_campaign(parameters[:email], parameters[:subject], parameters[:body]).deliver_later
+
+        render :json => { 'status': 'ok' }
     end
 
     def mail_many_as_campaign
@@ -20,6 +24,8 @@ class UsersController < ApplicationController
         parameters[:subjects].map {|subject|
             Mailer.send_as_campaign(parameters[:email], subject, parameters[:body]).deliver_later
         }
+
+        render :json => { 'status': 'ok' }
     end
 
     private
