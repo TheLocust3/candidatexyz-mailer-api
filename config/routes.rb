@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'root#index'
+
   post 'company' => 'mail#mail_as_company'
   post 'reset_password' => 'mail#mail_reset_password'
   post 'campaign' => 'mail#mail_as_campaign'
