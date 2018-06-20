@@ -1,5 +1,5 @@
 class MailController < ApplicationController
-    include Authenticatable
+    include CandidateXYZ::Concerns::Authenticatable
     before_action :authenticate, except: [ :mail_reset_password ]
 
     def mail_as_company

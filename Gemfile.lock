@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/TheLocust3/candidatexyz-common.git
+  revision: 4faf9a3c665ec6bcc6e137751b50716585a8851c
+  specs:
+    candidatexyz-common (0.1.0)
+      httparty
+      rails (~> 5.1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,6 +55,8 @@ GEM
     ffi (1.9.25)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -66,6 +76,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    multi_xml (0.6.0)
     nio4r (2.3.1)
     nokogiri (1.8.3)
       mini_portile2 (~> 2.3.0)
@@ -128,6 +139,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  candidatexyz-common!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
