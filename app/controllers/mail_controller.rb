@@ -14,7 +14,7 @@ class MailController < ApplicationController
         body = "
             <p>Someone has requested a link to change your password. You can do this through the link below.</p>
     
-            <p><a href='#{Rails.application.secrets.auth_api}/auth/password/edit?config=default&redirect_url=#{CGI.escape(params[:redirect_url])}&reset_password_token=#{params[:token]}'>Change my password</a></p>
+            <p><a href='#{Rails.application.secrets.auth_api}/auth/password/edit?config=default&redirect_url=#{CGI.escape("#{Rails.application.secrets.website}/reset_password")}&reset_password_token=#{params[:token]}'>Change my password</a></p>
             
             <p>If you didn&#39;t request this, please ignore this email.</p>
             <p>Your password won&#39;t change until you access the link above and create a new one.</p>
