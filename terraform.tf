@@ -21,7 +21,7 @@ variable "key" {
 data "aws_ami" "image" {
   # name_regex = "candidatexyz-barebones"
 
-  name_regex  = "mailer-api"
+  name_regex  = "mailerapi"
   most_recent = true
 }
 
@@ -159,10 +159,12 @@ resource "aws_lb_listener" "lb_listener2" {
 }
 
 resource "aws_autoscaling_group" "autoscaling" {
-  name                 = "${var.name}"
-  force_delete         = true
-  max_size             = "2"
-  min_size             = "2"
+  name             = "${var.name}"
+  force_delete     = true
+  max_size         = "2"
+  min_size         = "1"
+  desired_capacity = "1"
+
   launch_configuration = "${aws_launch_configuration.launch.name}"
   availability_zones   = ["${data.aws_availability_zone.zone.name}"]
   target_group_arns    = ["${aws_lb_target_group.target.arn}"]
@@ -192,6 +194,34 @@ resource "aws_codedeploy_deployment_group" "deployment" {
     deployment_option = "WITHOUT_TRAFFIC_CONTROL"
     deployment_type   = "IN_PLACE"
   }
+
+  // Terraform fails to setup Blue Green deployment so currently just set it up in AWS console
+  /*deployment_style {
+    deployment_option = "WITH_TRAFFIC_CONTROL"
+    deployment_type   = "BLUE_GREEN"
+  }
+
+  load_balancer_info {
+    target_group_info {
+      name = "${aws_lb_target_group.target.name}"
+    }
+  }
+
+  blue_green_deployment_config {
+    deployment_ready_option {
+      action_on_timeout    = "STOP_DEPLOYMENT"
+      wait_time_in_minutes = 60
+    }
+
+    green_fleet_provisioning_option {
+      action = "COPY_AUTO_SCALING_GROUP"
+    }
+
+    terminate_blue_instances_on_deployment_success {
+      action                           = "TERMINATE"
+      termination_wait_time_in_minutes = 10
+    }
+  }*/
 }
 
 output "dns_name" {
