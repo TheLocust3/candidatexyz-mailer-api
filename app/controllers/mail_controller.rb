@@ -26,8 +26,11 @@ class MailController < ApplicationController
     def mail_as_campaign
         parameters = mail_as_campaign_params(params)
         
-        token = Rails.application.message_verifier(:unsubscribe).generate({ resource_type: parameters[:resource_type], resource_id: parameters[:resource_id], campaign_id: parameters[:campaign_id] })
-        body = parameters[:body].gsub('[UNSUBSCRIBE]', "#{Rails.application.secrets.homesite}/unsubscribe/#{token}")
+        body = parameters[:body]
+        unless parameters[:resource_type].nil?
+            token = Rails.application.message_verifier(:unsubscribe).generate({ resource_type: parameters[:resource_type], resource_id: parameters[:resource_id], campaign_id: parameters[:campaign_id] })
+            body = body.gsub('[UNSUBSCRIBE]', "#{Rails.application.secrets.homesite}/unsubscribe/#{token}")
+        end
 
         Mailer.send_as_campaign(parameters[:email], parameters[:subject], body).deliver_later
 
