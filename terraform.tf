@@ -109,7 +109,7 @@ resource "aws_iam_role_policy_attachment" "deployment" {
 resource "aws_launch_configuration" "launch" {
   name                 = "${var.name}-config"
   image_id             = "${data.aws_ami.image.id}"
-  instance_type        = "t2.micro"
+  instance_type        = "t2.nano"
   security_groups      = ["${data.aws_security_group.security_group.id}"]
   iam_instance_profile = "${aws_iam_instance_profile.ec2-profile.name}"
   key_name             = "${var.key}"
@@ -193,6 +193,10 @@ resource "aws_codedeploy_deployment_group" "deployment" {
   deployment_style {
     deployment_option = "WITHOUT_TRAFFIC_CONTROL"
     deployment_type   = "IN_PLACE"
+  }
+
+  lifecycle {
+    ignore_changes = ["*"]
   }
 
   // Terraform fails to setup Blue Green deployment so currently just set it up in AWS console
