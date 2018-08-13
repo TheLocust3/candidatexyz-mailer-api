@@ -26,7 +26,7 @@ module MailerApi
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins '*'
+        origins 'candidatexyz.com', /.+\.candidatexyz.com/, /127.0.0.1:\d+/
         resource '*', headers: :any, methods: :any
       end
     end
