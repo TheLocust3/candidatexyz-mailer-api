@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/TheLocust3/candidatexyz-common.git
-  revision: 1e5bde88e9421c1fb988f795f204f0b66842203a
+  revision: ed4d66d8f92ae62aaefbbdaa5a871a1e7b56b707
+  branch: master
   specs:
     candidatexyz-common (0.1.1)
       httparty
@@ -150,6 +151,7 @@ DEPENDENCIES
   candidatexyz-common!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  minitest-reporters
   pg (>= 0.18, < 2.0)
   puma (~> 3.7)
   rack-cors
