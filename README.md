@@ -1,6 +1,7 @@
 # Mailer API
 
-The mailer API microservice for the [candidateXYZ](https://candidatexyz.com) webapps.
+The mailer API microservice for the [candidateXYZ](https://candidatexyz.com) webapps.  
+Check out the story [here](https://jakekinsella.com/projects/candidatexyz).
 
 ## Running
 
